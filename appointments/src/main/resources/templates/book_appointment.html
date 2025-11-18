@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Book Appointment</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+  <h2>Book Appointment</h2>
+  <form th:action="@{/appointments/book}" method="post">
+    <div class="mb-3">
+      <label>User</label>
+      <select name="userId" class="form-select" required>
+        <option th:each="user : ${users}" th:value="${user.id}"
+                th:text="${user.name} + ' (' + user.email + ')'">User Name</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label>Slot</label>
+      <select name="slotId" class="form-select" required>
+        <option th:each="slot : ${slots}" th:value="${slot.id}"
+                th:text="|${slot.date} ${slot.startTime}-${slot.endTime}|">Slot</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Book</button>
+    <a href="/" class="btn btn-link">Back</a>
+  </form>
+</div>
+</body>
+</html>
